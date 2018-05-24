@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
@@ -25,7 +26,7 @@ import android.widget.RelativeLayout;
  */
 
 public class ThirdActivity extends AppCompatActivity{
-    Button btn1, btn2;
+    Button btn1, btn2, btn3;
     private ImageView myImage;
     private int mCurrRotation = 0;
     private int rotationAngle = 45;
@@ -42,7 +43,10 @@ public class ThirdActivity extends AppCompatActivity{
         myImage = findViewById(R.id.image);
         btn1 = findViewById(R.id.t1);
         btn2 = findViewById(R.id.t2);
+        btn3 = findViewById(R.id.t3);
         btn1.setOnClickListener(v -> animate());
+        btn2.setOnClickListener(v -> fire());
+        btn3.setOnClickListener(v -> fire2());
         mover = findViewById(R.id.fragment_container);
         fragmentScroll = new FragmentScroll();
 
@@ -97,11 +101,32 @@ public class ThirdActivity extends AppCompatActivity{
 
     }
 
+    private void fire() {
+//        Intent intent = new Intent(this, FourthActivity.class);
+//        startActivity(intent);
+//        overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
+
+        Animation bottomUp = AnimationUtils.loadAnimation(getBaseContext(),
+                R.anim.slide_in_up);
+        ViewGroup hiddenPanel = (ViewGroup)findViewById(R.id.hidden_layer);
+        hiddenPanel.startAnimation(bottomUp);
+        hiddenPanel.setVisibility(View.VISIBLE);
+    }
+
+    private void fire2() {
+//        Intent intent = new Intent(this, FourthActivity.class);
+//        startActivity(intent);
+//        overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
+
+        Animation bottomDown = AnimationUtils.loadAnimation(getBaseContext(),
+                R.anim.slide_down);
+        ViewGroup hiddenPanel = (ViewGroup)findViewById(R.id.hidden_layer);
+        hiddenPanel.startAnimation(bottomDown);
+        hiddenPanel.setVisibility(View.INVISIBLE);
+    }
 
 
-
-
-        private void animate(){
+    private void animate(){
         float fromRotation = mCurrRotation;
         float toRotation = mCurrRotation += rotationAngle;
 
