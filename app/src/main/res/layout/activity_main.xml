@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.darkdragon.animations.MainActivity">
+
+
+    <com.darkdragon.animations.MyAnimations.DrawingView
+        android:id="@+id/draw"
+        android:layout_width="match_parent"
+        android:layout_height="442dp"
+        android:layout_margin="8dp"
+        android:layout_weight="4"
+        android:gravity="center"
+        android:background="#ed4e4e"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <Button
+        android:id="@+id/hit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:text="HIT"
+        android:layout_weight="1"
+
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Next"
+        android:layout_weight="1"
+        android:id="@+id/next"/>
+    </LinearLayout>
+</LinearLayout>
