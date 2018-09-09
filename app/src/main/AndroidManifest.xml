@@ -21,7 +21,7 @@
         <activity android:name=".ThirdActivity">
         </activity>
         <activity android:name=".FourthActivity"
-            android:theme="@android:style/Theme.DeviceDefault.DialogWhenLarge.NoActionBar">
+            android:theme="@android:style/Theme.Holo.Dialog">
 
         </activity>
     </application>

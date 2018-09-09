@@ -34,6 +34,7 @@ public class ThirdActivity extends AppCompatActivity{
     float initialX, initialY;
     private FragmentScroll fragmentScroll;
     private View mover;
+    private ViewGroup hiddenPanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class ThirdActivity extends AppCompatActivity{
         mover = findViewById(R.id.fragment_container);
         fragmentScroll = new FragmentScroll();
 
+        hiddenPanel = (ViewGroup)findViewById(R.id.hidden_layer);
 
         FragmentManager fragmentManager = getFragmentManager();
         android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -95,22 +97,55 @@ public class ThirdActivity extends AppCompatActivity{
         });
 
 
+        hiddenPanel.setOnTouchListener(new View.OnTouchListener()
+        {
+            PointF DownPT = new PointF(); // Record Mouse Position When Pressed Down
+            PointF StartPT = new PointF(); // Record Start Position of 'img'
 
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                switch (event.getAction())
+                {
+                    case MotionEvent.ACTION_MOVE :
+//                        hiddenPanel.setX((int)(StartPT.x + event.getX() - DownPT.x));
+
+                        hiddenPanel.setY((int)(StartPT.y + event.getY() - DownPT.y));
+                        StartPT.set( hiddenPanel.getX(), hiddenPanel.getY() );
+
+                        break;
+                    case MotionEvent.ACTION_DOWN :
+
+                        break;
+                    case MotionEvent.ACTION_UP :
+                        // Nothing have to do
+
+                        break;
+                    default :
+
+                        break;
+                }
+                return true;
+            }
+
+
+        });
 
 
 
     }
 
     private void fire() {
-//        Intent intent = new Intent(this, FourthActivity.class);
-//        startActivity(intent);
-//        overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
+        Intent intent = new Intent(this, FourthActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
 
-        Animation bottomUp = AnimationUtils.loadAnimation(getBaseContext(),
-                R.anim.slide_in_up);
-        ViewGroup hiddenPanel = (ViewGroup)findViewById(R.id.hidden_layer);
-        hiddenPanel.startAnimation(bottomUp);
-        hiddenPanel.setVisibility(View.VISIBLE);
+//        Animation bottomUp = AnimationUtils.loadAnimation(getBaseContext(),
+//                R.anim.slide_in_up);
+//
+//        hiddenPanel.startAnimation(bottomUp);
+//        hiddenPanel.setVisibility(View.VISIBLE);
     }
 
     private void fire2() {
@@ -120,7 +155,7 @@ public class ThirdActivity extends AppCompatActivity{
 
         Animation bottomDown = AnimationUtils.loadAnimation(getBaseContext(),
                 R.anim.slide_down);
-        ViewGroup hiddenPanel = (ViewGroup)findViewById(R.id.hidden_layer);
+
         hiddenPanel.startAnimation(bottomDown);
         hiddenPanel.setVisibility(View.INVISIBLE);
     }
